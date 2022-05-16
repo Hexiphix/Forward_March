@@ -8,6 +8,7 @@ public class Game {
     private static Game instance = null;
 
     private int randInt;
+    private int randInt2;
     private double randDouble;
     Random theRandom = new Random();
     Scanner playerInput = new Scanner(System.in);
@@ -191,11 +192,16 @@ public class Game {
                     }
                     System.out.println(enemy1.getHealth() + "\n\n");
                 }
+
+                if (positionsToLeft == 10 && enemy1.getHealth() <= 0)
+                {
+                    bossDefeated = true;
+                }
             }
             //Display item drops, Choose weather or not to keep an item
             try {
                 if (previousDirection == Direction.RIGHT){
-
+                    System.out.println("Choosing to go right, you are offered great power, at a cost");
                 }
             }
             catch (InputMismatchException e) {
@@ -207,8 +213,30 @@ public class Game {
             {
                 if (previousDirection == Direction.FORWARD)
                 {
-                    stage++;
+                    incrementStage();
                 }
+                System.out.println("\nBy not turning right, you feel your skills improve");
+                getPlayer().setMaxHealth(getPlayer().getMaxHealth() + ((int)(Math.round((getPlayer().getMaxHealth())*(0.15)))));
+                getPlayer().setStrength(getPlayer().getStrength() + ((int)(Math.round((getPlayer().getStrength())*(0.15)))));
+                getPlayer().setDefense(getPlayer().getDefense() + ((int)(Math.round((getPlayer().getDefense())*(0.15)))));
+                getPlayer().setSpeed(getPlayer().getSpeed() + ((int)(Math.round((getPlayer().getSpeed())*(0.15)))));
+                getPlayer().setLuck(getPlayer().getLuck() + ((int)(Math.round((getPlayer().getLuck())*(0.15)))));
+
+                System.out.println("Your new stat totals are: \n" +
+                        getPlayer().getMaxHealth() + " Max Health \n" +
+                        getPlayer().getStrength() + " Strength \n" +
+                        getPlayer().getDefense() + " Defense \n" +
+                        getPlayer().getSpeed() + " Speed \n" +
+                        getPlayer().getLuck() + " Luck \n");
+
+                if(getPlayer().getHealth() * 2 > getPlayer().getMaxHealth())
+                {
+                    getPlayer().setHealth(getPlayer().getMaxHealth());
+                }
+                else{
+                    getPlayer().setHealth(getPlayer().getHealth() + (getPlayer().getMaxHealth() / 2));
+                }
+                System.out.println("You feel healthier, health improves to " + getPlayer().getHealth() + " out of " + getPlayer().getMaxHealth());
             }
         }
 
