@@ -56,17 +56,32 @@ public class Game {
                 System.out.println("\nChoose a direction, 1 for turn left, 2 for forward, 3 for turn right");
                 playerNumberInput = playerInput.nextInt();
                 if(playerNumberInput == 1)
-                {previousDirection = Direction.LEFT;}
+                {previousDirection = Direction.LEFT;
+                positionsToLeft++;}
                 else if(playerNumberInput == 2)
                 {previousDirection = Direction.FORWARD;}
                 else if(playerNumberInput == 3)
-                {previousDirection = Direction.RIGHT;}
-                else
-                {System.out.println("\nWith your head in the clouds, you choose to got the same direction as before\n");}
+                {previousDirection = Direction.RIGHT;
+                positionsToLeft--;}
+                else {
+                    System.out.println("\nWith your head in the clouds, you choose to got the same direction as before\n");
+                    if(previousDirection == Direction.LEFT){
+                        positionsToLeft++;
+                    }
+                    else if(previousDirection == Direction.RIGHT){
+                        positionsToLeft--;
+                    }
+                }
             }
             catch (InputMismatchException e) {
                 playerNumberInput = 0;
                 System.out.println("\nWith your head in the clouds, you choose to got the same direction as before\n");
+                if(previousDirection == Direction.LEFT){
+                    positionsToLeft++;
+                }
+                else if(previousDirection == Direction.RIGHT){
+                    positionsToLeft--;
+                }
             }
             //Begin the fight, generate the enemies
 
@@ -77,17 +92,24 @@ public class Game {
 
                 }
                 catch (InputMismatchException e) {
-
+                    playerNumberInput = 0;
                 }
             //}
             //Display item drops, Choose weather or not to keep an item
             try {
+                if (previousDirection == Direction.RIGHT){
 
+                }
             }
             catch (InputMismatchException e) {
-
+                playerNumberInput = 0;
+                System.out.println("Fumbling the object, you loose hold of it entirely and can't find it again, too bad!");
             }
             //Apply level up if available
+            if (previousDirection == Direction.FORWARD || previousDirection == Direction.LEFT)
+            {
+
+            }
         }
 
         if (getPlayer().getHealth() <= 0) {
