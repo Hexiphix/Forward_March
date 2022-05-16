@@ -1,17 +1,26 @@
 package ForwardMarch;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
     private static Game instance = null;
 
+    private int randInt;
+    private double randDouble;
+    Random theRandom = new Random();
     Scanner playerInput = new Scanner(System.in);
+
     private int playerNumberInput = 0;
     private boolean bossDefeated = false;
     private int positionsToLeft = 0;
     private int stage = 1;
     private Direction previousDirection = Direction.FORWARD;
+
+    private EnemyFactory enemyFactory;
+    private Enemy enemy1;
+    private String enemy1Title;
 
     private Game() {
         try {
@@ -85,7 +94,35 @@ public class Game {
                 }
             }
             //Begin the fight, generate the enemies
-
+            if(positionsToLeft == 10)
+            {
+                enemy1 = enemyFactory.getEnemy("primalMonster");
+                enemy1Title = "King Goblin";
+            }
+            else
+            {
+                randInt = theRandom.nextInt(3);
+                if (randInt == 0)
+                {
+                    enemy1 = enemyFactory.getEnemy("goblin");
+                    enemy1Title = "goblin";
+                }
+                else if (randInt == 1)
+                {
+                    enemy1 = enemyFactory.getEnemy("zombie");
+                    enemy1Title = "zombie";
+                }
+                else if (randInt == 2)
+                {
+                    enemy1 = enemyFactory.getEnemy("decayed");
+                    enemy1Title = "decayed";
+                }
+                else
+                {
+                    enemy1 = enemyFactory.getEnemy("primalMonster");
+                    enemy1Title = "King Goblin";
+                }
+            }
 
             //Fight the battle
             //while () {
@@ -111,6 +148,8 @@ public class Game {
             {
 
             }
+
+            break;
         }
 
         if (getPlayer().getHealth() <= 0) {

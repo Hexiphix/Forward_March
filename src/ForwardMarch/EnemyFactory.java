@@ -11,7 +11,7 @@ public class EnemyFactory {
             case "decayed":
                 return new Decayed();
             case "primalMonster":
-                return new Goblin();
+                return new KingGoblin();
         }
         return null;
     }

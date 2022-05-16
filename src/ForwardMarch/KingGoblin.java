@@ -1,15 +1,15 @@
 package ForwardMarch;
 
-public class Goblin extends Enemy{
+public class KingGoblin extends Enemy{
 
     public void baseStats()
     {
         setRegenStrategy(new NoRegen());
-        setMaxHealth(20);
-        setStrength(7);
-        setDefense(7);
-        setSpeed(12);
-        setLuck(14);
+        setMaxHealth(2000);
+        setStrength(700);
+        setDefense(700);
+        setSpeed(1200);
+        setLuck(1400);
         setHealth(getMaxHealth());
         resetHitChance();
     }
