@@ -105,6 +105,7 @@ public class Game {
             }
             else
             {
+                //This is where the factory pattern comes in play, when enemyFactory gets an Enemy
                 randInt = theRandom.nextInt(3);
                 if (randInt == 0)
                 {
@@ -181,6 +182,8 @@ public class Game {
                     }
                     System.out.println(getPlayer().getHealth() + " out of " + getPlayer().getMaxHealth());
                     System.out.print("The " + enemy1Title + " has it hp change from " + enemy1.getHealth() + " to ");
+
+                    //This is where the strategy pattern is use, in the form of RegenStrategy's regenerate
                     enemy1.setHealth(enemy1.getHealth() + enemy1.getRegenStrategy().regenerate(enemy1.getMaxHealth()));
                     if(enemy1.getMaxHealth() < enemy1.getHealth())
                     {

@@ -23,7 +23,7 @@ public class Player {
         System.out.println("Player instance created ");
         System.out.println(this);
     }
-    //Creates a Game singleton
+    //Creates a Player singleton
     public static Player getInstance(){
         if(instance == null) {
             instance = new Player();
