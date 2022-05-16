@@ -202,6 +202,52 @@ public class Game {
             try {
                 if (previousDirection == Direction.RIGHT){
                     System.out.println("Choosing to go right, you are offered great power, at a cost");
+                    randInt = theRandom.nextInt(6);
+                    randInt2 = theRandom.nextInt(6);
+                    System.out.print("Would you like to sacrifice 25% of your current ");
+                    if(randInt == 0)     {System.out.print("Max Health");}
+                    else if(randInt == 1){System.out.print("Strength");}
+                    else if(randInt == 2){System.out.print("Defense");}
+                    else if(randInt == 3){System.out.print("Speed");}
+                    else if(randInt == 4){System.out.print("Luck");}
+                    else if(randInt == 5){System.out.print("!!Health Regen!!");}
+                    System.out.print(" and be rewarded by doubling you current ");
+                    if(randInt2 == 0)     {System.out.println("Max Health");}
+                    else if(randInt2 == 1){System.out.println("Strength");}
+                    else if(randInt2 == 2){System.out.println("Defense");}
+                    else if(randInt2 == 3){System.out.println("Speed");}
+                    else if(randInt2 == 4){System.out.println("Luck");}
+                    else if(randInt2 == 5){System.out.println("!!Health Regen!!");}
+                    System.out.println("Enter 1 for yes, enter 0 (or anything else) for no:");
+                    playerNumberInput = playerInput.nextInt();
+                    playerInput.nextLine();
+                    if(playerNumberInput == 1)
+                    {
+                        if(randInt == 0)     {getPlayer().setMaxHealth((int)(Math.round(getPlayer().getMaxHealth() * 0.75)));}
+                        else if(randInt == 1){getPlayer().setStrength((int)(Math.round(getPlayer().getStrength() * 0.75)));}
+                        else if(randInt == 2){getPlayer().setDefense((int)(Math.round(getPlayer().getDefense() * 0.75)));}
+                        else if(randInt == 3){getPlayer().setSpeed((int)(Math.round(getPlayer().getSpeed() * 0.75)));}
+                        else if(randInt == 4){getPlayer().setLuck((int)(Math.round(getPlayer().getLuck() * 0.75)));}
+                        else if(randInt == 5){getPlayer().setHealthRegenRate(getPlayer().getHealthRegenRate() * 0.75);}
+
+                        if(randInt2 == 0)     {getPlayer().setMaxHealth(getPlayer().getMaxHealth() * 2);}
+                        else if(randInt2 == 1){getPlayer().setStrength(getPlayer().getStrength() * 2);}
+                        else if(randInt2 == 2){getPlayer().setDefense(getPlayer().getDefense() * 2);}
+                        else if(randInt2 == 3){getPlayer().setSpeed(getPlayer().getSpeed() * 2);}
+                        else if(randInt2 == 4){getPlayer().setLuck(getPlayer().getLuck() * 2);}
+                        else if(randInt2 == 5){getPlayer().setHealthRegenRate(getPlayer().getHealthRegenRate() * 2);}
+
+                        System.out.println("Your new stat totals are: \n" +
+                                getPlayer().getMaxHealth() + " Max Health \n" +
+                                getPlayer().getStrength() + " Strength \n" +
+                                getPlayer().getDefense() + " Defense \n" +
+                                getPlayer().getSpeed() + " Speed \n" +
+                                getPlayer().getLuck() + " Luck \n");
+                    }
+                    else
+                    {
+                        System.out.println("\nYou cast aside the cursed accessory and move on...\n");
+                    }
                 }
             }
             catch (InputMismatchException e) {
