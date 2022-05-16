@@ -204,7 +204,7 @@ public class Game {
             {
                 if (previousDirection == Direction.FORWARD)
                 {
-
+                    stage++;
                 }
             }
         }
