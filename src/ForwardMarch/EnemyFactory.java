@@ -5,11 +5,11 @@ public class EnemyFactory {
     public Enemy getEnemy(String enemyType) {
         switch (enemyType) {
             case "goblin":
-                return new Enemy();
+                return new Goblin();
             case "zombie":
-                return new Enemy();
+                return new Zombie();
             case "decayed":
-                return new Enemy();
+                return new Decayed();
         }
         return null;
     }

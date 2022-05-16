@@ -55,6 +55,13 @@ public class Enemy {
         this.luck = luck;
     }
 
+    public RegenStrategy getRegenStrategy() {
+        return regenStrategy;
+    }
+    public void setRegenStrategy(RegenStrategy regenStrategy) {
+        this.regenStrategy = regenStrategy;
+    }
+
     public double getHitChance() {
         return hitChance;
     }
