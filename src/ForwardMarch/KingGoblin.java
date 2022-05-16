@@ -2,9 +2,14 @@ package ForwardMarch;
 
 public class KingGoblin extends Enemy{
 
+    public KingGoblin()
+    {
+        baseStats();
+    }
+
     public void baseStats()
     {
-        setRegenStrategy(new NoRegen());
+        setRegenStrategy(new SmallRegen());
         setMaxHealth(2000);
         setStrength(700);
         setDefense(700);

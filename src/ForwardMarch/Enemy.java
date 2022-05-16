@@ -10,7 +10,6 @@ public class Enemy {
     //private int mana, maxMana;
     private double hitChance;
 
-
     public void applyStageBuff(){
         setMaxHealth(stageBuffCalc(getMaxHealth()));
         setStrength(stageBuffCalc(getStrength()));
@@ -23,7 +22,7 @@ public class Enemy {
     }
     private int stageBuffCalc(int baseStat){
         int stage = Game.getInstance().getStage();
-        return (baseStat+((int)((Math.pow(1.4, stage)) * Math.round(baseStat*(0.2)))));
+        return (baseStat+((int)(Math.round((Math.pow(1.4, stage)) * baseStat * (0.2)))));
     }
 
     //Space for all stat to be get, set, and reset

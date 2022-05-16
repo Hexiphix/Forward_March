@@ -2,6 +2,11 @@ package ForwardMarch;
 
 public class Decayed extends Enemy{
 
+    public Decayed()
+    {
+        baseStats();
+    }
+
     public void baseStats()
     {
         setRegenStrategy(new Decay());

@@ -15,10 +15,13 @@ public class Game {
     private int playerNumberInput = 0;
     private boolean bossDefeated = false;
     private int positionsToLeft = 0;
-    private int stage = 1;
+    private int stage = 0;
     private Direction previousDirection = Direction.FORWARD;
 
-    private EnemyFactory enemyFactory;
+    private int playerBattleReady = 0;
+    private int enemy1BattleReady = 0;
+
+    private EnemyFactory enemyFactory = new EnemyFactory();
     private Enemy enemy1;
     private String enemy1Title;
 
@@ -82,6 +85,7 @@ public class Game {
                         positionsToLeft--;
                     }
                 }
+                playerInput.nextLine();
             }
             catch (InputMismatchException e) {
                 playerNumberInput = 0;
@@ -122,17 +126,69 @@ public class Game {
                     enemy1 = enemyFactory.getEnemy("primalMonster");
                     enemy1Title = "King Goblin";
                 }
+
+                enemy1.applyStageBuff();
             }
 
-            //Fight the battle
-            //while () {
-                try {
+            System.out.println("\nA fearsome " + enemy1Title + " approaches with: \n" +
+                    enemy1.getMaxHealth() + " Health \n" +
+                    enemy1.getStrength() + " Strength \n" +
+                    enemy1.getDefense() + " Defense \n" +
+                    enemy1.getSpeed() + " Speed \n" +
+                    enemy1.getLuck() + " Luck \n");
 
+            //Fight the battle (basically just a punching contest)
+            while (enemy1.getHealth() > 0 && getPlayer().getHealth() > 0) {
+                playerBattleReady += getPlayer().getSpeed();
+                enemy1BattleReady += enemy1.getSpeed();
+                if (playerBattleReady > 1000) {
+                    System.out.println("You are about to attack, input something then press enter to attack!");
+                    try {
+                        playerInput.nextLine();
+                    } catch (InputMismatchException e) {
+                        playerNumberInput = 0;
+                    }
+                    playerBattleReady -= 1000;
+                    System.out.print(enemy1Title + " has its health drop from " + enemy1.getHealth() + " to ");
+                    if((getPlayer().getStrength())-(enemy1.getDefense()) > ((int)(Math.round(getPlayer().getStrength() * 0.2))))
+                    {
+                        enemy1.setHealth(enemy1.getHealth() - ((getPlayer().getStrength())-(enemy1.getDefense())));
+                    }
+                    else
+                    {
+                        enemy1.setHealth(enemy1.getHealth() - ((int)(Math.round(getPlayer().getStrength() * 0.2))));
+                    }
+                    System.out.println(enemy1.getHealth() + " out of " + enemy1.getMaxHealth());
+                    System.out.print("Your hp recovers from " + getPlayer().getHealth() + " to ");
+                    getPlayer().setHealth(getPlayer().getHealth() + ((int)(Math.round(getPlayer().getHealth() * getPlayer().getHealthRegenRate()))));
+                    if(getPlayer().getMaxHealth() < getPlayer().getHealth())
+                    {
+                        getPlayer().setHealth(getPlayer().getMaxHealth());
+                    }
+                    System.out.println(getPlayer().getHealth() + "\n\n");
                 }
-                catch (InputMismatchException e) {
-                    playerNumberInput = 0;
+                if (enemy1BattleReady > 1000) {
+                    System.out.println("The " + enemy1Title + " attacks!");
+                    enemy1BattleReady -= 1000;
+                    System.out.print("Your health drop from " + getPlayer().getHealth() + " to ");
+                    if((enemy1.getStrength())-(getPlayer().getDefense()) > ((int)(Math.round(enemy1.getStrength() * 0.2))))
+                    {
+                        getPlayer().setHealth(getPlayer().getHealth() - ((enemy1.getStrength())-(getPlayer().getDefense())));
+                    }
+                    else
+                    {
+                        getPlayer().setHealth(getPlayer().getHealth() - ((int)(Math.round(enemy1.getStrength() * 0.2))));
+                    }
+                    System.out.println(getPlayer().getHealth() + " out of " + getPlayer().getMaxHealth());
+                    System.out.print("The " + enemy1Title + " has it hp change from " + enemy1.getHealth() + " to ");
+                    enemy1.setHealth(enemy1.getHealth() + enemy1.getRegenStrategy().regenerate(enemy1.getMaxHealth()));
+                    if(enemy1.getMaxHealth() < enemy1.getHealth())
+                    {
+                        enemy1.setHealth(enemy1.getMaxHealth());
+                    }
+                    System.out.println(enemy1.getHealth() + "\n\n");
                 }
-            //}
+            }
             //Display item drops, Choose weather or not to keep an item
             try {
                 if (previousDirection == Direction.RIGHT){
@@ -146,10 +202,11 @@ public class Game {
             //Apply level up if available
             if (previousDirection == Direction.FORWARD || previousDirection == Direction.LEFT)
             {
+                if (previousDirection == Direction.FORWARD)
+                {
 
+                }
             }
-
-            break;
         }
 
         if (getPlayer().getHealth() <= 0) {

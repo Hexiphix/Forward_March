@@ -2,6 +2,11 @@ package ForwardMarch;
 
 public class Goblin extends Enemy{
 
+    public Goblin()
+    {
+        baseStats();
+    }
+
     public void baseStats()
     {
         setRegenStrategy(new NoRegen());

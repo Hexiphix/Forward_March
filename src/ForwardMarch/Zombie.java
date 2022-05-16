@@ -2,6 +2,11 @@ package ForwardMarch;
 
 public class Zombie extends Enemy{
 
+    public Zombie()
+    {
+        baseStats();
+    }
+
     public void baseStats()
     {
         setRegenStrategy(new SmallRegen());
