@@ -10,6 +10,8 @@ public class EnemyFactory {
                 return new Zombie();
             case "decayed":
                 return new Decayed();
+            case "primalMonster":
+                return new Goblin();
         }
         return null;
     }

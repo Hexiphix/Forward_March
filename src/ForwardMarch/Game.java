@@ -10,6 +10,7 @@ public class Game {
     private int playerNumberInput = 0;
     private boolean bossDefeated = false;
     private int positionsToLeft = 0;
+    private int stage = 1;
     private Direction previousDirection = Direction.FORWARD;
 
     private Game() {
@@ -149,6 +150,16 @@ public class Game {
     }
     public void setPositionsToLeft(int positionsToLeft) {
         this.positionsToLeft = positionsToLeft;
+    }
+
+    public int getStage() {
+        return stage;
+    }
+    public void setStage(int stage) {
+        this.stage = stage;
+    }
+    public void incrementStage(){
+        stage++;
     }
 
     public Direction getPreviousDirection() {

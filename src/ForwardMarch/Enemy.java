@@ -11,6 +11,21 @@ public class Enemy {
     private double hitChance;
 
 
+    public void applyStageBuff(){
+        setMaxHealth(stageBuffCalc(getMaxHealth()));
+        setStrength(stageBuffCalc(getStrength()));
+        setDefense(stageBuffCalc(getDefense()));
+        setSpeed(stageBuffCalc(getSpeed()));
+        setLuck(stageBuffCalc(getLuck()));
+
+        setHealth(getMaxHealth());
+        resetHitChance();
+    }
+    private int stageBuffCalc(int baseStat){
+        int stage = Game.getInstance().getStage();
+        return (baseStat+((int)((Math.pow(1.4, stage)) * Math.round(baseStat*(0.2)))));
+    }
+
     //Space for all stat to be get, set, and reset
 
     public int getHealth() {
